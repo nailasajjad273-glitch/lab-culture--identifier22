@@ -1,4 +1,4 @@
-https://lab-culture-identifier22.vercel.app# 🔬 Clinical Microbiology Culture Identifier & Diagnostic Suite
+# 🔬 Clinical Microbiology Culture Identifier & Diagnostic Suite
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-lab--culture--identifier22.vercel.app-059669?style=for-the-badge&logo=vercel)](https://lab-culture-identifier22.vercel.app/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -13,6 +13,12 @@ An advanced AI-powered clinical microbiology and diagnostic decision-support sys
 ---
 
 ## ✨ Key Features & Capabilities
+
+### 0. 🔐 Clinical Staff Login & Authentication Portal
+- **Role-Based Access**: Dedicated authentication page for clinical laboratory staff, senior microbiologists, pathology residents, technologists, and medical students.
+- **Institutional Profile**: Captures staff credentials, professional titles, and facility/hospital affiliations.
+- **One-Click Demo Profiles**: Quick sign-in buttons for seamless testing and demonstration.
+- **Persistent Session Handling**: Secure local storage session persistence with top-bar user badge and instant sign-out capability.
 
 ### 1. 🧬 AI Agar Culture Colony Identifier
 - **Computer Vision Analysis**: Upload or capture high-resolution images of agar culture plates (Blood Agar, MacConkey, Sabouraud Dextrose, CLED, Mueller-Hinton, Chocolate Agar, Mannitol Salt Agar, etc.).
@@ -113,4 +119,3 @@ An advanced AI-powered clinical microbiology and diagnostic decision-support sys
 
 ## 📄 License
 Licensed under the Apache License, Version 2.0.
-vvvv 

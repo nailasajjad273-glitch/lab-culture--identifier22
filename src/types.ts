@@ -130,3 +130,13 @@ export interface ClinicalQuizCase {
   explanation: string;
   clinicalPearls: string[];
 }
+
+export interface UserProfile {
+  name: string;
+  email: string;
+  role: 'Senior Microbiologist' | 'Pathology Resident' | 'Lab Technologist' | 'Medical Student';
+  facility: string;
+  token: string;
+  loginTimestamp: string;
+}
+

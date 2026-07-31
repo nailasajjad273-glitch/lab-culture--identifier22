@@ -1,14 +1,22 @@
 import React from 'react';
-import { TabType } from '../types';
-import { Microscope, FlaskConical, Disc3, BookOpen, GraduationCap, FileSpreadsheet, Sparkles } from 'lucide-react';
+import { TabType, UserProfile } from '../types';
+import { Microscope, FlaskConical, Disc3, BookOpen, GraduationCap, FileSpreadsheet, Sparkles, LogOut, UserCheck } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
   savedReportsCount: number;
+  currentUser: UserProfile | null;
+  onLogout: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, savedReportsCount }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  activeTab,
+  setActiveTab,
+  savedReportsCount,
+  currentUser,
+  onLogout,
+}) => {
   const tabs = [
     { id: 'identifier' as TabType, label: 'AI Visual Identifier', icon: Microscope, badge: 'AI Powered' },
     { id: 'matrix' as TabType, label: 'Biochemical Matrix', icon: FlaskConical },
@@ -24,8 +32,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, savedRe
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('identifier')}>
-            <div className="p-2.5 bg-gradient-to-br from-emerald-500 to-teal-700 rounded-xl shadow-lg shadow-emerald-500/20 text-white">
-              <Microscope className="w-6 h-6" />
+            <div className="p-2.5 bg-gradient-to-br from-emerald-500 to-teal-700 rounded-xl shadow-lg shadow-emerald-500/20 text-slate-950">
+              <Microscope className="w-6 h-6 text-slate-950" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
@@ -47,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, savedRe
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
                     isActive
                       ? 'bg-slate-800 text-emerald-400 border border-slate-700 shadow-sm'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
@@ -56,12 +64,12 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, savedRe
                   <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-400' : 'text-slate-400'}`} />
                   <span>{tab.label}</span>
                   {tab.badge && (
-                    <span className="ml-1.5 px-1.5 py-0.2 text-[10px] font-bold bg-emerald-500/20 text-emerald-300 rounded uppercase">
+                    <span className="ml-1 px-1.5 py-0.2 text-[9px] font-bold bg-emerald-500/20 text-emerald-300 rounded uppercase">
                       {tab.badge}
                     </span>
                   )}
                   {tab.count !== undefined && tab.count > 0 && (
-                    <span className="ml-1.5 px-1.5 py-0.5 text-xs font-bold bg-slate-700 text-slate-200 rounded-full">
+                    <span className="ml-1 px-1.5 py-0.5 text-[10px] font-bold bg-slate-700 text-slate-200 rounded-full">
                       {tab.count}
                     </span>
                   )}
@@ -69,6 +77,30 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, savedRe
               );
             })}
           </nav>
+
+          {/* User Profile & Sign Out */}
+          {currentUser && (
+            <div className="flex items-center space-x-3">
+              <div className="hidden sm:flex flex-col text-right">
+                <div className="flex items-center justify-end space-x-1 text-xs font-bold text-slate-200">
+                  <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="truncate max-w-[140px]">{currentUser.name}</span>
+                </div>
+                <span className="text-[10px] text-emerald-400 font-medium">
+                  {currentUser.role}
+                </span>
+              </div>
+
+              <button
+                onClick={onLogout}
+                title="Sign Out of Diagnostic Suite"
+                className="px-3 py-1.5 bg-slate-800 hover:bg-rose-500/20 text-slate-300 hover:text-rose-300 border border-slate-700 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-colors"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Sign Out</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Mobile Navigation Tabs */}
@@ -96,3 +128,4 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, savedRe
     </header>
   );
 };
+

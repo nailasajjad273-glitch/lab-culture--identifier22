@@ -4,8 +4,9 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { TabType, CultureIdentificationResult } from './types';
+import { TabType, CultureIdentificationResult, UserProfile } from './types';
 import { Navbar } from './components/Navbar';
+import { LoginView } from './components/LoginView';
 import { AIIdentifierView } from './components/AIIdentifierView';
 import { BiochemicalMatrixView } from './components/BiochemicalMatrixView';
 import { ASTCalculatorView } from './components/ASTCalculatorView';
@@ -15,6 +16,15 @@ import { ReportsHistoryView } from './components/ReportsHistoryView';
 import { LabReportModal } from './components/LabReportModal';
 
 export default function App() {
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    try {
+      const storedUser = localStorage.getItem('lab_culture_auth_user');
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch {
+      return null;
+    }
+  });
+
   const [activeTab, setActiveTab] = useState<TabType>('identifier');
   const [savedReports, setSavedReports] = useState<CultureIdentificationResult[]>(() => {
     try {
@@ -35,6 +45,15 @@ export default function App() {
     }
   }, [savedReports]);
 
+  const handleLoginSuccess = (user: UserProfile) => {
+    setCurrentUser(user);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('lab_culture_auth_user');
+    setCurrentUser(null);
+  };
+
   const handleIdentificationComplete = (result: CultureIdentificationResult) => {
     setSavedReports((prev) => [result, ...prev]);
   };
@@ -43,12 +62,18 @@ export default function App() {
     setSavedReports([]);
   };
 
+  if (!currentUser) {
+    return <LoginView onLoginSuccess={handleLoginSuccess} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500 selection:text-slate-950">
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         savedReportsCount={savedReports.length}
+        currentUser={currentUser}
+        onLogout={handleLogout}
       />
 
       <main className="pb-16">
@@ -86,3 +111,4 @@ export default function App() {
     </div>
   );
 }
+
