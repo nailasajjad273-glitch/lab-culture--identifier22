@@ -89,8 +89,6 @@ An advanced AI-powered clinical microbiology and diagnostic decision-support sys
 3. **Configure Environment Variables**
    Create a `.env` file in the root directory (refer to `.env.example`):
    ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
 
 4. **Start Development Server**
    ```bash
