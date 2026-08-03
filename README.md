@@ -71,7 +71,7 @@ An advanced AI-powered clinical microbiology and diagnostic decision-support sys
 ### Prerequisites
 - **Node.js** (v18.0 or higher)
 - **npm** or **yarn**
-- **Google Gemini API Key** (obtainable from [Google AI Studio](https://aistudio.google.com/))
+- **Google Gemini API Key** (obtainable from [Google AI Studio](https://aistudio.google.com/))ss
 
 ### Installation
 
