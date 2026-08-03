@@ -71,7 +71,7 @@ An advanced AI-powered clinical microbiology and diagnostic decision-support sys
 ### Prerequisites
 - **Node.js** (v18.0 or higher)
 - **npm** or **yarn**
-- **Google Gemini API Key** (obtainable from [Google AI Studio](https://aistudio.google.com/))ss
+- **Google Gemini API Key** (obtainable from [Google AI Studio](https://aistudio.google.com/))
 
 ### Installation
 
@@ -86,9 +86,19 @@ An advanced AI-powered clinical microbiology and diagnostic decision-support sys
    npm install
    ```
 
-3. **Configure Environment Variables**
-   Create a `.env` file in the root directory (refer to `.env.example`):
+### 3. **Configure Environment Variables & API Keys**
+   Create a `.env` file in the root directory based on `.env.example`:
    ```env
+   # Google Gemini API Key - Required for AI visual culture analysis and case generation
+   GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
+
+   # Application Hosted URL (Optional for local development)
+   APP_URL=http://localhost:3000
+   ```
+
+   > **Note on Obtaining an API Key**:
+   > You can get a free Google Gemini API Key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+   > For production deployments (e.g. Vercel, Cloud Run), add `GEMINI_API_KEY` in your environment settings.
 
 4. **Start Development Server**
    ```bash
